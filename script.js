@@ -18,16 +18,19 @@ function generatePassword() {
     
     var passwordLength = false;
     var passwordCharSelect = true;
-    var numCount = 0
-    var upperCount = 0
-    var lowerCount = 0
-    var specialCount = 0
+    var numCount = 0;
+    var upperCount = 0;
+    var lowerCount = 0;
+    var specialCount = 0;
 
     //length check
     while (passwordLength === false) {
         var pwL = prompt("How long do you want your password to be?\nPlease input a number between 8-128.");
         if (pwL >= 8 && pwL <= 128) {
             passwordLength = true;
+        }
+        else {
+        alert("To create a password please input a number between 8 and 128");
         }
     }
 
@@ -76,11 +79,16 @@ function generatePassword() {
             selectedArrays.push("u");
             upperCount ++;
         };
+
+        if (passwordCharSelect === true) {
+            alert("Please select at least one character type to create a password...");
+        }
+        
     }
 
     // determine the number of each selected char type
     while ( numCount + specialCount + lowerCount + upperCount < pwL){
-        var index = Math.floor(Math.random() * selectedArrays.length)
+        var index = Math.floor(Math.random() * selectedArrays.length);
         if (selectedArrays[index] == "n") {
             numCount ++;
         }
@@ -99,7 +107,7 @@ function generatePassword() {
     var indexArray = [];
     var password = '';
     while ( numCount + specialCount + lowerCount + upperCount > 0 ) {
-        var index = Math.floor(Math.random() * selectedArrays.length)
+        var index = Math.floor(Math.random() * selectedArrays.length);
         if (selectedArrays[index] == "n" && numCount > 0) {
             numCount --;
             password = password + randomChar(numArray);
@@ -120,7 +128,7 @@ function generatePassword() {
         }
     }
 
-    return(password)
+    return(password);
 }
 
 //UTF conversion (into the actual characters (contrived))
@@ -131,13 +139,13 @@ function UTFConvert(arr, arrLength) {
         var loopStart = arr[i][0];
         var loopend = arr[i][1];
         for (var n = loopStart; n <= loopend; n++) {
-            charArray.push(String.fromCharCode(n))
+            charArray.push(String.fromCharCode(n));
         }
     }
     return (charArray) //return the info to each selected array
 }
 
 function randomChar(characterArray) {
-    var index = Math.floor(Math.random() * characterArray.length)
-    return(characterArray[index])
+    var index = Math.floor(Math.random() * characterArray.length);
+    return(characterArray[index]);
 }
